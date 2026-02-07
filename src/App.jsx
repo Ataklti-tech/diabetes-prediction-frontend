@@ -50,24 +50,27 @@ const App = () => {
     setResult(null);
 
     try {
-      const response = await fetch(`${BACKEND_URL}/predict`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "https://diabetes-prediction-backend-xbjg.onrender.com/predict",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            pregnancies: parseInt(formData.pregnancies),
+            glucose: parseFloat(formData.glucose),
+            blood_pressure: parseFloat(formData.blood_pressure),
+            skin_thickness: parseFloat(formData.skin_thickness),
+            insulin: parseFloat(formData.insulin),
+            bmi: parseFloat(formData.bmi),
+            diabetes_pedigree_function: parseFloat(
+              formData.diabetes_pedigree_function,
+            ),
+            age: parseInt(formData.age),
+          }),
         },
-        body: JSON.stringify({
-          pregnancies: parseInt(formData.pregnancies),
-          glucose: parseFloat(formData.glucose),
-          blood_pressure: parseFloat(formData.blood_pressure),
-          skin_thickness: parseFloat(formData.skin_thickness),
-          insulin: parseFloat(formData.insulin),
-          bmi: parseFloat(formData.bmi),
-          diabetes_pedigree_function: parseFloat(
-            formData.diabetes_pedigree_function,
-          ),
-          age: parseInt(formData.age),
-        }),
-      });
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
