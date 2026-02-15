@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 // import "./App.css";
 import "./App2.css";
 
-const BACKEND_URL = "https://diabetes-prediction-backend-xbjg.onrender.com";
+// const BACKEND_URL = "https://diabetes-prediction-backend-xbjg.onrender.com";
+// const BACKEND_URL = "http://localhost:8000";
 const App = () => {
   const [formData, setFormData] = useState({
     pregnancies: "",
     glucose: "",
-    blood_pressure: "",
+    // blood_pressure: "",
     skin_thickness: "",
     insulin: "",
     bmi: "",
@@ -27,7 +28,9 @@ const App = () => {
 
   const checkAPIHealth = async () => {
     try {
-      const response = await fetch(`${BACKEND_URL}/health`);
+      const response = await fetch(
+        `https://diabetes-prediction-backend-xbjg.onrender.com/health`,
+      );
       const data = await response.json();
       setApiHealth(data);
     } catch (err) {
